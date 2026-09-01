@@ -1,10 +1,10 @@
 import useAssetExists from '../hooks/useAssetExists'
 
-// Copiar el archivo real a public/maps/Perú.svg — en cuanto exista, se usa
-// automáticamente en lugar de la silueta de abajo. Esa silueta no es un
-// boceto: su "d" viene de la frontera real del Perú (GeoJSON de la
-// frontera nacional), proyectada a este viewBox con corrección de
-// latitud; los pines usan las mismas coordenadas geográficas.
+// Hay un archivo real en public/icons/maps/Perú.svg, pero su encaje
+// (aspect ratio y posición de pines) todavía no está calibrado con esta
+// silueta, así que de momento se sigue usando la silueta de abajo, que ya
+// viene de la frontera real del Perú (GeoJSON de la frontera nacional)
+// proyectada a este viewBox con corrección de latitud.
 const PERU_SVG_SRC = encodeURI('/maps/Perú.svg')
 
 const VIEW_W = 400
