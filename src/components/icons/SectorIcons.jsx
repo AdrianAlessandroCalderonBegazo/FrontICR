@@ -1,7 +1,9 @@
-// Iconos de sector — ilustraciones propias en estilo lineal, a la espera de
-// reemplazo por los archivos svgrepo indicados (mining-svgrepo-com.svg,
-// factory-industry-construction-svgrepo-com.svg, farmer-human-svgrepo-com.svg,
-// wool-svgrepo-com.svg, energy-panel-solar-sun-svgrepo-com.svg).
+// Iconos de sector — ilustraciones propias en estilo lineal, usadas como
+// respaldo mientras no existan los archivos svgrepo reales. En cuanto se
+// copien a public/icons/sectors/ con el nombre indicado en SECTOR_ICON_FILES,
+// SectorIcon los detecta automáticamente y los usa en su lugar (ver abajo).
+
+import useAssetExists from '../../hooks/useAssetExists'
 
 export function MinaIcon({ className = 'w-10 h-10' }) {
   return (
@@ -76,7 +78,45 @@ export const sectorIconMap = {
   energia: EnergiaIcon,
 }
 
-export function SectorIcon({ id, className }) {
-  const Icon = sectorIconMap[id] || EnergiaIcon
-  return <Icon className={className} />
+// Copiar cada archivo tal cual (mismo nombre) a public/icons/sectors/.
+export const SECTOR_ICON_FILES = {
+  mina: 'mining-svgrepo-com.svg',
+  industria: 'factory-industry-construction-svgrepo-com.svg',
+  agricultura: 'farmer-human-svgrepo-com.svg',
+  textil: 'wool-svgrepo-com.svg',
+  energia: 'energy-panel-solar-sun-svgrepo-com.svg',
+}
+
+export function SectorIcon({ id, className = 'w-10 h-10' }) {
+  const file = SECTOR_ICON_FILES[id]
+  const src = file ? `/icons/sectors/${file}` : null
+  const hasRealIcon = useAssetExists(src)
+  const Fallback = sectorIconMap[id] || EnergiaIcon
+
+  if (hasRealIcon) {
+    // Técnica de máscara: el svg real se recorta con el color actual
+    // (currentColor), así se ve blanco/navy igual que los iconos propios
+    // sin importar los colores originales del archivo svgrepo.
+    return (
+      <span
+        role="img"
+        aria-label={id}
+        className={className}
+        style={{
+          display: 'inline-block',
+          backgroundColor: 'currentColor',
+          WebkitMaskImage: `url(${src})`,
+          maskImage: `url(${src})`,
+          WebkitMaskRepeat: 'no-repeat',
+          maskRepeat: 'no-repeat',
+          WebkitMaskPosition: 'center',
+          maskPosition: 'center',
+          WebkitMaskSize: 'contain',
+          maskSize: 'contain',
+        }}
+      />
+    )
+  }
+
+  return <Fallback className={className} />
 }

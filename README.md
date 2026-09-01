@@ -25,7 +25,15 @@ El sitio está completo a nivel de estructura y funciona con contenido e ilustra
 - **Imágenes de proyectos y sectores**: hoy se usan ilustraciones generadas (`SceneIllustration`) por sector. Reemplazar por fotos reales en cada página/componente que las usa (`Home`, `Sectores`, `Experiencia`, `ProyectoDetalle`, `ProjectCard`).
 - **Video institucional** en `Nosotros`: colocar el archivo en `public/videos/nosotros-hero.mp4` (y opcionalmente un poster) — el componente ya está listo para mostrarlo automáticamente en cuanto exista.
 - **Logo real**: hoy se usa un isotipo generado en `Navbar.jsx` y `favicon.svg`.
-- **Íconos de sector y mapa del Perú**: se usan versiones propias mientras se reciben `mining-svgrepo-com.svg`, `factory-industry-construction-svgrepo-com.svg`, `farmer-human-svgrepo-com.svg`, `wool-svgrepo-com.svg`, `energy-panel-solar-sun-svgrepo-com.svg` y `Perú.svg`.
+- **Íconos de sector y mapa del Perú**: listos para recibir los archivos reales sin tocar código — solo copiarlos a la ruta indicada y el sitio los detecta y usa automáticamente:
+  - `public/icons/sectors/mining-svgrepo-com.svg` (Mina)
+  - `public/icons/sectors/factory-industry-construction-svgrepo-com.svg` (Industria)
+  - `public/icons/sectors/farmer-human-svgrepo-com.svg` (Agricultura)
+  - `public/icons/sectors/wool-svgrepo-com.svg` (Textil)
+  - `public/icons/sectors/energy-panel-solar-sun-svgrepo-com.svg` (Energía)
+  - `public/maps/Perú.svg` (mapa del Perú; si los pines de proyectos no calzan con la forma real, ajustar `PINS` en `src/components/PeruMap.jsx`)
+
+  Mientras no existan, se usan íconos y silueta dibujados a mano como respaldo.
 - **Tipografía Gotham-Book**: no se recibió el archivo; el body usa una fuente de respaldo del sistema. Al agregar `Gotham-Book.woff2`/`.woff` a `public/fonts/`, la regla `@font-face` en `src/index.css` la tomará automáticamente.
 - **Datos de contacto** (`src/data/content.js` → `contact`): teléfono/WhatsApp, correo, dirección y redes sociales son provisionales.
 - **Página Soluciones**: queda en espera de contenido definitivo, tal como se solicitó.
