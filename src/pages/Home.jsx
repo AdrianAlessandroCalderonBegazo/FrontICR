@@ -47,7 +47,7 @@ export default function Home() {
           </div>
 
           <div className="rounded-3xl bg-icr-navy p-6 md:p-8">
-            <p className="mb-4 text-center font-bold text-white">Presentes en todo el Perú</p>
+            <p className="mb-4 text-center font-bold text-white">Presentes en todo el Sur del Perú</p>
             <PeruMap className="mx-auto h-auto w-full max-w-sm" />
           </div>
         </div>
