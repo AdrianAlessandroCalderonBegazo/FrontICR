@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import Carousel from '../components/Carousel'
 import SectionHeading from '../components/SectionHeading'
-import SceneIllustration from '../components/illustrations/SceneIllustration'
+import ProjectImage from '../components/ProjectImage'
+import HeroBackground from '../components/HeroBackground'
 import PeruMap from '../components/PeruMap'
 import WhatsAppButton from '../components/WhatsAppButton'
 import { SectorIcon } from '../components/icons/SectorIcons'
@@ -10,9 +11,9 @@ import { brand, sectors, hitos } from '../data/content'
 export default function Home() {
   return (
     <div>
-      {/* imagen1: hero principal — reemplazar SceneIllustration por la foto que se envíe */}
+      {/* Copiar la foto a public/images/backgroundMain.(jpg|jpeg|png|webp) para reemplazar el fondo */}
       <section className="relative isolate overflow-hidden bg-icr-navy">
-        <SceneIllustration sector="energia" className="absolute inset-0 h-full w-full" />
+        <HeroBackground slot="backgroundMain" sector="energia" className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 bg-gradient-to-t from-icr-navy via-icr-navy/70 to-icr-navy/40" />
         <div className="container-icr relative z-10 flex min-h-[80vh] flex-col justify-center py-24 text-white">
           <span className="section-eyebrow text-icr-mint">Inversiones ICR</span>
@@ -71,7 +72,7 @@ export default function Home() {
                 key={project.id}
                 className="flex h-full flex-col overflow-hidden rounded-2xl border border-icr-navy/10 bg-white shadow-sm"
               >
-                <SceneIllustration sector={project.sector} className="aspect-[16/10] w-full" />
+                <ProjectImage project={project} className="aspect-[16/10] w-full" />
                 <div className="flex flex-1 flex-col p-6">
                   <p className="text-xs font-bold uppercase tracking-wide text-icr-cyan">{project.location}</p>
                   <h3 className="mt-1 font-bold text-lg text-icr-navy">{project.title}</h3>

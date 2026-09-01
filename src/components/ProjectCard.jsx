@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import SceneIllustration from './illustrations/SceneIllustration'
+import ProjectImage from './ProjectImage'
 import { sectors } from '../data/content'
 
 export default function ProjectCard({ project }) {
@@ -7,8 +7,8 @@ export default function ProjectCard({ project }) {
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-icr-navy/10 bg-white shadow-sm transition-shadow hover:shadow-card">
-      <SceneIllustration
-        sector={project.sector}
+      <ProjectImage
+        project={project}
         label={sector?.name}
         className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-105"
       />

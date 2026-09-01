@@ -1,33 +1,17 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Carousel from '../components/Carousel'
 import SectionHeading from '../components/SectionHeading'
-import SceneIllustration from '../components/illustrations/SceneIllustration'
+import ProjectImage from '../components/ProjectImage'
+import HeroBackground from '../components/HeroBackground'
+import VideoWithFallback from '../components/VideoWithFallback'
 import { brand, history, values, hitos } from '../data/content'
 
 export default function Nosotros() {
-  // El video solo se hace visible cuando termina de cargar un frame real,
-  // así la ilustración de respaldo se ve limpia mientras no exista el
-  // archivo /public/videos/nosotros-hero.mp4.
-  const [videoReady, setVideoReady] = useState(false)
-
   return (
     <div>
-      {/* video1: video de fondo institucional — colocar en /public/videos/nosotros-hero.mp4 */}
+      {/* Copiar la foto a public/images/backgroundNosotros.(jpg|jpeg|png|webp) para reemplazar el fondo */}
       <section className="relative isolate flex min-h-[70vh] items-center overflow-hidden bg-icr-navy">
-        <SceneIllustration sector="energia" className="absolute inset-0 h-full w-full" />
-        <video
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-            videoReady ? 'opacity-70' : 'opacity-0'
-          }`}
-          autoPlay
-          muted
-          loop
-          playsInline
-          onLoadedData={() => setVideoReady(true)}
-        >
-          <source src="/videos/nosotros-hero.mp4" type="video/mp4" />
-        </video>
+        <HeroBackground slot="backgroundNosotros" sector="energia" className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 bg-gradient-to-b from-icr-navy/50 via-icr-navy/55 to-icr-navy/85" />
         <div className="container-icr relative z-10 py-24 text-center text-white">
           <span className="section-eyebrow text-icr-mint">Nosotros</span>
@@ -65,6 +49,22 @@ export default function Nosotros() {
         </div>
       </section>
 
+      {/* Video institucional */}
+      <section className="bg-white py-20 md:py-28">
+        <div className="container-icr">
+          <SectionHeading
+            eyebrow="Inversiones ICR"
+            title="Energía confiable en cada instalación"
+            description="Así trabajamos: ingeniería aplicada, equipos de calidad y acompañamiento técnico en cada proyecto."
+          />
+          <VideoWithFallback
+            src="/videos/nosotros-video.mp4"
+            sector="energia"
+            className="mx-auto aspect-video w-full max-w-4xl rounded-3xl shadow-card"
+          />
+        </div>
+      </section>
+
       {/* Nuestros hitos */}
       <section className="bg-[#f5f8fb] py-20 md:py-28" id="hitos">
         <div className="container-icr">
@@ -84,7 +84,7 @@ export default function Nosotros() {
                 key={project.id}
                 className="flex h-full flex-col overflow-hidden rounded-2xl border border-icr-navy/10 bg-white shadow-sm"
               >
-                <SceneIllustration sector={project.sector} className="aspect-[16/10] w-full" />
+                <ProjectImage project={project} className="aspect-[16/10] w-full" />
                 <div className="flex flex-1 flex-col p-6">
                   <p className="text-xs font-bold uppercase tracking-wide text-icr-cyan">{project.location}</p>
                   <h3 className="mt-1 font-bold text-lg text-icr-navy">{project.title}</h3>

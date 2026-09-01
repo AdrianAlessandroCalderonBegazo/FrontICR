@@ -103,6 +103,9 @@ export const projects = [
     client: 'Anglo American',
     location: 'Moquegua, Perú',
     sector: 'mina',
+    // Imágenes referenciales de instalaciones ICR (no del sitio de Quellaveco,
+    // que no tiene fotografía propia todavía).
+    images: ['/images/projects/mina-quellaveco-1.jpg', '/images/projects/mina-quellaveco-2.jpg'],
     featured: true,
     hito: true,
     summary:
@@ -122,6 +125,7 @@ export const projects = [
     client: 'Sauna Adán y Eva',
     location: 'Tacna, Perú',
     sector: 'industria',
+    images: ['/images/projects/sauna-adan-eva-1.jpg', '/images/projects/sauna-adan-eva-2.jpg'],
     featured: true,
     hito: true,
     summary:
@@ -139,6 +143,8 @@ export const projects = [
     client: 'Pozo Negro',
     location: 'Arequipa, Perú',
     sector: 'industria',
+    // Imágenes referenciales de instalaciones ICR en Arequipa (sin foto propia del sitio).
+    images: ['/images/projects/pozo-negro-1.jpg', '/images/projects/pozo-negro-2.jpg'],
     featured: false,
     hito: false,
     summary:
@@ -156,6 +162,7 @@ export const projects = [
     client: 'Kleinfor',
     location: 'Cayma, Arequipa, Perú',
     sector: 'textil',
+    images: ['/images/projects/kleinfor-1.jpg', '/images/projects/kleinfor-2.jpg'],
     featured: true,
     hito: true,
     summary:
@@ -173,6 +180,7 @@ export const projects = [
     client: 'Super Sport',
     location: 'Puerto Maldonado, Perú',
     sector: 'textil',
+    images: ['/images/projects/super-sport-1.jpg'],
     featured: false,
     hito: false,
     summary:
@@ -190,6 +198,7 @@ export const projects = [
     client: 'Radio Primavera',
     location: 'Moquegua, Perú',
     sector: 'energia',
+    images: ['/images/projects/radio-primavera-1.jpg'],
     featured: false,
     hito: false,
     summary:
@@ -207,6 +216,7 @@ export const projects = [
     client: 'SEAL',
     location: 'Jesús, Arequipa, Perú',
     sector: 'energia',
+    images: ['/images/projects/seal-1.jpg', '/images/projects/seal-2.jpg', '/images/projects/seal-3.jpg'],
     featured: true,
     hito: false,
     summary:
@@ -224,6 +234,7 @@ export const projects = [
     client: 'Centro de Estudios y Promoción del Desarrollo',
     location: 'Puquio, Ayacucho, Perú',
     sector: 'energia',
+    images: ['/images/projects/ong-desco-1.jpg', '/images/projects/ong-desco-2.jpg'],
     featured: true,
     hito: true,
     summary:
@@ -247,6 +258,7 @@ export const agricultureGeneric = {
     'Sistemas de bombeo y riego tecnificado alimentados por energía solar, pensados para llevar continuidad energética a zonas rurales y operaciones agrícolas alejadas de la red eléctrica.',
   description:
     'Aplicando la misma ingeniería que respalda nuestros proyectos de bombeo y extracción en minería e industria, desarrollamos soluciones fotovoltaicas para riego tecnificado y electrificación de operaciones agrícolas, reduciendo la dependencia de combustibles fósiles y asegurando continuidad operativa en campo.',
+  image: '/images/sectors/agricultura.jpg',
   isGeneric: true,
 }
 

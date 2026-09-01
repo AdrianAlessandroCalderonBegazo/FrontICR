@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import SceneIllustration from '../components/illustrations/SceneIllustration'
+import ProjectImage from '../components/ProjectImage'
 import WhatsAppButton from '../components/WhatsAppButton'
 import { projects, sectors } from '../data/content'
 
@@ -24,7 +24,7 @@ export default function ProyectoDetalle() {
   return (
     <div>
       <section className="relative isolate overflow-hidden bg-icr-navy text-white">
-        <SceneIllustration sector={project.sector} className="absolute inset-0 h-full w-full" />
+        <ProjectImage project={project} className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 bg-gradient-to-t from-icr-navy via-icr-navy/70 to-icr-navy/30" />
         <div className="container-icr relative z-10 py-20 md:py-28">
           <Link to="/experiencia" className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white">
@@ -42,11 +42,10 @@ export default function ProyectoDetalle() {
       <section className="bg-white py-16 md:py-20">
         <div className="container-icr grid grid-cols-1 gap-12 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            {/* Galería del proyecto — reemplazar por las fotografías reales cuando se envíen */}
             <div className="grid grid-cols-2 gap-4">
-              <SceneIllustration sector={project.sector} className="col-span-2 aspect-[16/9] w-full rounded-2xl" />
-              <SceneIllustration sector={project.sector} className="aspect-[4/3] w-full rounded-2xl" />
-              <SceneIllustration sector={project.sector} className="aspect-[4/3] w-full rounded-2xl" />
+              <ProjectImage project={project} index={0} className="col-span-2 aspect-[16/9] w-full rounded-2xl" />
+              <ProjectImage project={project} index={1} className="aspect-[4/3] w-full rounded-2xl" />
+              <ProjectImage project={project} index={2} className="aspect-[4/3] w-full rounded-2xl" />
             </div>
 
             <h2 className="mt-10 font-black text-2xl text-icr-navy">Sobre el proyecto</h2>
@@ -86,7 +85,7 @@ export default function ProyectoDetalle() {
                   to={`/experiencia/${r.id}`}
                   className="group overflow-hidden rounded-2xl border border-icr-navy/10"
                 >
-                  <SceneIllustration sector={r.sector} className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-105" />
+                  <ProjectImage project={r} className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-105" />
                   <div className="p-5">
                     <h3 className="font-bold text-icr-navy">{r.title}</h3>
                     <p className="mt-1 text-sm text-icr-navy/60">{r.location}</p>

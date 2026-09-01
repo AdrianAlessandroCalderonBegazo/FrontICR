@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Carousel from '../components/Carousel'
 import SectionHeading from '../components/SectionHeading'
-import SceneIllustration from '../components/illustrations/SceneIllustration'
+import ProjectImage from '../components/ProjectImage'
 import WhatsAppButton from '../components/WhatsAppButton'
 import FAQAccordion from '../components/FAQAccordion'
 import { SectorIcon } from '../components/icons/SectorIcons'
@@ -75,7 +75,11 @@ export default function Sectores() {
 
           {isGenericSector ? (
             <div className="grid grid-cols-1 items-center gap-8 rounded-2xl border border-icr-navy/10 bg-white p-6 md:grid-cols-2 md:p-10">
-              <SceneIllustration sector="agricultura" className="aspect-[4/3] w-full rounded-xl" />
+              <img
+                src={agricultureGeneric.image}
+                alt={agricultureGeneric.title}
+                className="aspect-[4/3] w-full rounded-xl object-cover"
+              />
               <div>
                 <span className="rounded-full bg-icr-cyan/10 px-3 py-1 text-xs font-bold text-icr-cyan">
                   Imagen referencial
@@ -91,7 +95,7 @@ export default function Sectores() {
                   key={project.id}
                   className="grid grid-cols-1 overflow-hidden rounded-2xl border border-icr-navy/10 bg-white sm:grid-cols-2"
                 >
-                  <SceneIllustration sector={project.sector} className="aspect-[4/3] w-full sm:h-full" />
+                  <ProjectImage project={project} className="aspect-[4/3] w-full sm:h-full" />
                   <div className="flex flex-col p-6">
                     <p className="text-xs font-bold uppercase tracking-wide text-icr-cyan">{project.location}</p>
                     <h3 className="mt-1 font-bold text-lg text-icr-navy">{project.title}</h3>
@@ -118,7 +122,7 @@ export default function Sectores() {
                 key={project.id}
                 className="grid grid-cols-1 overflow-hidden rounded-2xl border border-icr-navy/10 bg-white shadow-sm sm:grid-cols-2"
               >
-                <SceneIllustration sector={project.sector} className="aspect-[4/3] w-full sm:h-full" />
+                <ProjectImage project={project} className="aspect-[4/3] w-full sm:h-full" />
                 <div className="flex flex-col justify-center p-6">
                   <h3 className="font-bold text-lg text-icr-navy">{project.title}</h3>
                   <p className="mt-2 text-sm text-icr-navy/70">{project.summary}</p>
