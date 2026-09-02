@@ -105,7 +105,7 @@ export const projects = [
     sector: 'mina',
     // Imágenes referenciales de instalaciones ICR (no del sitio de Quellaveco,
     // que no tiene fotografía propia todavía).
-    images: ['/images/projects/mina-quellaveco-1.jpg', '/images/projects/mina-quellaveco-2.jpg'],
+    images: ['/images/projects/mina-quellaveco-1.jpg', '/images/projects/mina-quellaveco-2.jpg', '/images/projects/mina-quellaveco-3.jpg'],
     featured: true,
     hito: true,
     summary:
@@ -125,7 +125,7 @@ export const projects = [
     client: 'Sauna Adán y Eva',
     location: 'Tacna, Perú',
     sector: 'industria',
-    images: ['/images/projects/sauna-adan-eva-1.jpg', '/images/projects/sauna-adan-eva-2.jpg'],
+    images: ['/images/projects/sauna-adan-eva-1.jpg', '/images/projects/sauna-adan-eva-2.jpg', '/images/projects/sauna-adan-eva-3.jpg'],
     featured: true,
     hito: true,
     summary:
@@ -144,7 +144,7 @@ export const projects = [
     location: 'Arequipa, Perú',
     sector: 'industria',
     // Imágenes referenciales de instalaciones ICR en Arequipa (sin foto propia del sitio).
-    images: ['/images/projects/pozo-negro-1.jpg', '/images/projects/pozo-negro-2.jpg'],
+    images: ['/images/projects/pozo-negro-1.png', '/images/projects/pozo-negro-2.jpg', '/images/projects/pozo-negro-3.png'],
     featured: false,
     hito: false,
     summary:
@@ -162,7 +162,7 @@ export const projects = [
     client: 'Kleinfor',
     location: 'Cayma, Arequipa, Perú',
     sector: 'textil',
-    images: ['/images/projects/kleinfor-1.jpg', '/images/projects/kleinfor-2.jpg'],
+    images: ['/images/projects/kleinfor-1.jpg', '/images/projects/kleinfor-2.jpg', '/images/projects/kleinfor-3.JPG'],
     featured: true,
     hito: true,
     summary:
@@ -180,7 +180,7 @@ export const projects = [
     client: 'Super Sport',
     location: 'Puerto Maldonado, Perú',
     sector: 'textil',
-    images: ['/images/projects/super-sport-1.jpg'],
+    images: ['/images/projects/super-sport-1.jpg','/images/projects/super-sport-2.jpeg','/images/projects/super-sport-3.jpeg'],
     featured: false,
     hito: false,
     summary:
@@ -198,7 +198,7 @@ export const projects = [
     client: 'Radio Primavera',
     location: 'Moquegua, Perú',
     sector: 'energia',
-    images: ['/images/projects/radio-primavera-1.jpg'],
+    images: ['/images/projects/radio-primavera-1.png', '/images/projects/radio-primavera-2.png', '/images/projects/radio-primavera-3.png'],
     featured: false,
     hito: false,
     summary:
