@@ -25,6 +25,33 @@ por sí mismo los estáticos — en el Dockerfile hay que copiar también `publi
 (es el patrón estándar documentado por Next.js para `output: standalone`). Aún no
 se agregó el Dockerfile en sí — avisar si se quiere que lo arme.
 
+## Formulario de contacto
+
+El formulario de `/contacto` envía un correo real vía `POST /api/contact`
+(`src/app/api/contact/route.js`), usando SMTP a través de `nodemailer`.
+
+- **Validación**: nombre, correo, celular y ambos selects son obligatorios;
+  el correo debe tener formato válido y el celular debe tener exactamente
+  9 dígitos. La misma validación (`src/lib/contactValidation.js`) corre en
+  el navegador (errores debajo de cada campo, sin llegar a enviar) y de
+  nuevo en el servidor (nunca confía solo en el cliente).
+- **Configuración**: copiar `.env.example` a `.env.local` y completar
+  `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASS`. Sin esas variables,
+  el formulario sigue validando pero el envío responde un error controlado
+  ("El envío de correo no está configurado todavía.") en vez de romperse.
+- **Destinatario**: `CONTACT_EMAIL_TO` (por defecto `calderonbegazo@gmail.com`
+  si no se define). Cambiar el correo de destino más adelante es solo
+  cambiar esa variable de entorno — no requiere tocar código ni redeploy
+  del código, solo de la config.
+- **Pensado para responder la cotización**: el correo que llega tiene el
+  `Reply-To` puesto al correo que la persona escribió en el formulario, así
+  que responder ese correo desde la bandeja de `calderonbegazo@gmail.com`
+  le llega directo al cliente, no de vuelta a la cuenta remitente. El
+  asunto incluye nombre y solución de interés, y el cuerpo lista todos los
+  campos etiquetados (nombre, correo, celular, cómo se enteró, solución).
+- **Antispam básico**: un campo honeypot oculto (`website`) descarta envíos
+  de bots sin enviar correo ni mostrar error.
+
 ## Estructura
 
 - `src/app/` — rutas del App Router: `page.jsx` (Home), `nosotros/`, `sectores/`, `soluciones/`, `experiencia/` (+ `experiencia/[id]/` para el detalle de proyecto, con `generateStaticParams`), `contacto/`, además de `layout.jsx` (navbar + footer + metadata del sitio) y `globals.css`.
@@ -45,4 +72,4 @@ El sitio está completo a nivel de estructura y funciona con contenido e ilustra
 - **Tipografía Gotham-Book**: ✅ lista, con `.woff2` y `.woff` en `public/fonts/`.
 - **Datos de contacto** (`src/data/content.js` → `contact`): teléfono/WhatsApp, correo, dirección y redes sociales son provisionales.
 - **Página Soluciones**: queda en espera de contenido definitivo, tal como se solicitó.
-- **Formulario de contacto**: al enviarse, arma un mensaje con los datos y abre WhatsApp (no hay backend todavía). Las opciones del selector "¿Qué solución te interesa?" son genéricas (Solución 1–4) hasta tener el listado real.
+- **Formulario de contacto**: ✅ envía correo real (ver sección "Formulario de contacto" más arriba) — falta solo configurar las credenciales SMTP reales en el entorno de despliegue. Las opciones del selector "¿Qué solución te interesa?" son genéricas (Solución 1–4) hasta tener el listado real.

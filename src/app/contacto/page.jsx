@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import WhatsAppButton from '../../components/WhatsAppButton'
-import { contact, whatsappLink } from '../../data/content'
+import { contact } from '../../data/content'
+import { validateContactForm } from '../../lib/contactValidation'
 
 const HEARD_OPTIONS = [
   'Redes sociales',
@@ -23,28 +24,73 @@ const initialForm = {
   celular: '',
   comoTeEnteraste: '',
   solucion: '',
+  website: '', // honeypot: los bots suelen rellenarlo, las personas nunca lo ven
 }
+
+const fieldClass = (hasError) =>
+  `rounded-xl border px-4 py-3 outline-none transition-colors ${
+    hasError ? 'border-red-400 focus:border-red-500' : 'border-icr-navy/15 focus:border-icr-cyan'
+  }`
 
 export default function Contacto() {
   const [form, setForm] = useState(initialForm)
-  const [sent, setSent] = useState(false)
+  const [errors, setErrors] = useState({})
+  const [status, setStatus] = useState('idle') // idle | submitting | success | error
+  const [statusMessage, setStatusMessage] = useState('')
 
-  const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }))
+  const update = (field) => (e) => {
+    const { value } = e.target
+    setForm((f) => ({ ...f, [field]: value }))
+    setErrors((err) => {
+      if (!err[field]) return err
+      const next = { ...err }
+      delete next[field]
+      return next
+    })
+  }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const message = [
-      'Hola, quiero información sobre soluciones energéticas de Inversiones ICR.',
-      `Nombre completo: ${form.nombre}`,
-      `Correo: ${form.correo}`,
-      `Celular: ${form.celular}`,
-      `¿Cómo se enteró de nosotros?: ${form.comoTeEnteraste || '—'}`,
-      `Solución de interés: ${form.solucion || '—'}`,
-    ].join('\n')
 
-    window.open(whatsappLink(message), '_blank', 'noopener,noreferrer')
-    setSent(true)
-    setForm(initialForm)
+    if (form.website) return // honeypot activado, no seguir
+
+    const nextErrors = validateContactForm(form)
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors)
+      setStatus('idle')
+      return
+    }
+
+    setStatus('submitting')
+    setStatusMessage('')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      const data = await res.json().catch(() => ({}))
+
+      if (res.ok && data.ok) {
+        setStatus('success')
+        setForm(initialForm)
+        setErrors({})
+        return
+      }
+
+      if (data.errors) {
+        setErrors(data.errors)
+        setStatus('idle')
+        return
+      }
+
+      setStatus('error')
+      setStatusMessage(data.message || 'No se pudo enviar tu solicitud. Intenta de nuevo.')
+    } catch {
+      setStatus('error')
+      setStatusMessage('No se pudo enviar tu solicitud. Revisa tu conexión e intenta de nuevo.')
+    }
   }
 
   return (
@@ -64,57 +110,76 @@ export default function Contacto() {
 
       <section className="bg-white py-16 md:py-24">
         <div className="container-icr grid grid-cols-1 gap-14 lg:grid-cols-[1.1fr_0.9fr]">
-          <form onSubmit={handleSubmit} className="rounded-2xl border border-icr-navy/10 p-6 md:p-10">
+          <form onSubmit={handleSubmit} noValidate className="rounded-2xl border border-icr-navy/10 p-6 md:p-10">
             <h2 className="font-black text-2xl text-icr-navy">Déjanos tus datos</h2>
             <p className="mt-2 text-sm text-icr-navy/60">
               Completa el formulario y te contactaremos a la brevedad. También puedes enviarnos tus datos
               directamente por WhatsApp.
             </p>
 
+            {/* Campo trampa para bots — oculto para personas */}
+            <input
+              type="text"
+              name="website"
+              value={form.website}
+              onChange={update('website')}
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden"
+              aria-hidden="true"
+            />
+
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
               <label className="flex flex-col gap-2 sm:col-span-2">
                 <span className="text-sm font-bold text-icr-navy">Nombre completo</span>
                 <input
-                  required
                   type="text"
                   value={form.nombre}
                   onChange={update('nombre')}
                   placeholder="Ej. María Pérez"
-                  className="rounded-xl border border-icr-navy/15 px-4 py-3 outline-none focus:border-icr-cyan"
+                  aria-invalid={Boolean(errors.nombre)}
+                  className={fieldClass(errors.nombre)}
                 />
+                {errors.nombre && <span className="text-xs font-medium text-red-500">{errors.nombre}</span>}
               </label>
 
               <label className="flex flex-col gap-2">
                 <span className="text-sm font-bold text-icr-navy">Correo electrónico</span>
                 <input
-                  required
                   type="email"
                   value={form.correo}
                   onChange={update('correo')}
                   placeholder="nombre@correo.com"
-                  className="rounded-xl border border-icr-navy/15 px-4 py-3 outline-none focus:border-icr-cyan"
+                  aria-invalid={Boolean(errors.correo)}
+                  className={fieldClass(errors.correo)}
                 />
+                {errors.correo && <span className="text-xs font-medium text-red-500">{errors.correo}</span>}
               </label>
 
               <label className="flex flex-col gap-2">
                 <span className="text-sm font-bold text-icr-navy">Celular</span>
                 <input
-                  required
                   type="tel"
                   value={form.celular}
                   onChange={update('celular')}
-                  placeholder="9XX XXX XXX"
-                  className="rounded-xl border border-icr-navy/15 px-4 py-3 outline-none focus:border-icr-cyan"
+                  placeholder="987654321"
+                  aria-invalid={Boolean(errors.celular)}
+                  className={fieldClass(errors.celular)}
                 />
+                {errors.celular ? (
+                  <span className="text-xs font-medium text-red-500">{errors.celular}</span>
+                ) : (
+                  <span className="text-xs text-icr-navy/50">9 dígitos, sin espacios ni guiones.</span>
+                )}
               </label>
 
               <label className="flex flex-col gap-2">
                 <span className="text-sm font-bold text-icr-navy">¿Cómo te enteraste de nosotros?</span>
                 <select
-                  required
                   value={form.comoTeEnteraste}
                   onChange={update('comoTeEnteraste')}
-                  className="rounded-xl border border-icr-navy/15 px-4 py-3 outline-none focus:border-icr-cyan"
+                  aria-invalid={Boolean(errors.comoTeEnteraste)}
+                  className={fieldClass(errors.comoTeEnteraste)}
                 >
                   <option value="" disabled>
                     Selecciona una opción
@@ -125,15 +190,18 @@ export default function Contacto() {
                     </option>
                   ))}
                 </select>
+                {errors.comoTeEnteraste && (
+                  <span className="text-xs font-medium text-red-500">{errors.comoTeEnteraste}</span>
+                )}
               </label>
 
               <label className="flex flex-col gap-2">
                 <span className="text-sm font-bold text-icr-navy">¿Qué solución te interesa?</span>
                 <select
-                  required
                   value={form.solucion}
                   onChange={update('solucion')}
-                  className="rounded-xl border border-icr-navy/15 px-4 py-3 outline-none focus:border-icr-cyan"
+                  aria-invalid={Boolean(errors.solucion)}
+                  className={fieldClass(errors.solucion)}
                 >
                   <option value="" disabled>
                     Selecciona una opción
@@ -144,20 +212,25 @@ export default function Contacto() {
                     </option>
                   ))}
                 </select>
+                {errors.solucion && <span className="text-xs font-medium text-red-500">{errors.solucion}</span>}
               </label>
             </div>
 
             <button
               type="submit"
-              className="mt-8 w-full rounded-full bg-icr-navy py-3.5 font-bold text-white transition-colors hover:bg-icr-blue sm:w-auto sm:px-10"
+              disabled={status === 'submitting'}
+              className="mt-8 w-full rounded-full bg-icr-navy py-3.5 font-bold text-white transition-colors hover:bg-icr-blue disabled:opacity-60 sm:w-auto sm:px-10"
             >
-              Enviar
+              {status === 'submitting' ? 'Enviando…' : 'Enviar'}
             </button>
 
-            {sent && (
+            {status === 'success' && (
               <p className="mt-4 text-sm font-medium text-icr-cyan">
-                ¡Gracias! Se abrió WhatsApp con tus datos para que confirmes el envío.
+                ¡Gracias! Recibimos tus datos y un especialista te contactará pronto.
               </p>
+            )}
+            {status === 'error' && (
+              <p className="mt-4 text-sm font-medium text-red-500">{statusMessage}</p>
             )}
           </form>
 

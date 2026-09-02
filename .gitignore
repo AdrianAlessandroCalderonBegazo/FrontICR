@@ -17,6 +17,11 @@ dist-ssr
 out
 next-env.d.ts
 
+# Environment variables (never commit real SMTP credentials)
+.env
+.env.local
+.env.*.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
