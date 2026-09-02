@@ -190,8 +190,8 @@ export default function Contacto() {
 
             <div className="rounded-2xl border border-icr-navy/10 p-8">
               <h3 className="font-bold text-lg text-icr-navy">Horario de atención</h3>
-              <p className="mt-3 text-sm text-icr-navy/70">Lunes a viernes: 9:00 a.m. – 6:00 p.m.</p>
-              <p className="text-sm text-icr-navy/70">Sábados: 9:00 a.m. – 1:00 p.m.</p>
+              <p className="mt-3 text-sm text-icr-navy/70">Lunes a viernes: 8:00 a.m. – 7:00 p.m.</p>
+              <p className="text-sm text-icr-navy/70">Sábados: 8:00 a.m. – 12:00 a.m.</p>
             </div>
           </div>
         </div>

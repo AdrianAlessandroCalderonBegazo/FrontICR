@@ -16,6 +16,8 @@ const VIEW_H = 470
 // silueta más abajo) y de las coordenadas geográficas de cada ciudad.
 const PINS = [
   { id: 'tacna', label: 'Tacna', x: 309.3, y: 438.3, labelSide: 'left' },
+  { id: 'puno', label: 'Puno', x: 320.3, y: 380.3, labelSide: 'left' },
+  { id: 'cusco', label: 'Cuzco', x: 290.3, y: 336.3, labelSide: 'left' },
   { id: 'arequipa', label: 'Arequipa', x: 280.0, y: 401.3, labelSide: 'left' },
   { id: 'moquegua', label: 'Moquegua', x: 293.8, y: 419.4, labelSide: 'left' },
   { id: 'ayacucho', label: 'Ayacucho', x: 221.0, y: 361.6 },
