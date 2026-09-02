@@ -22,22 +22,22 @@ export const brand = {
     'Porque cuando la energía funciona correctamente, las personas y organizaciones pueden avanzar.',
   ],
   brandContext:
-    'Inversiones ICR es una empresa especializada en soluciones energéticas, enfocada en la comercialización de componentes electrónicos, sistemas de energía solar y tecnologías relacionadas con eficiencia y respaldo energético. Desarrollamos proyectos B2B para industrias, minería, instituciones públicas, gobiernos y organizaciones con necesidades críticas de continuidad energética, y atendemos el mercado B2C mediante kits solares y soluciones energéticas para hogares y pequeños negocios. Nuestra experiencia combina tecnología, implementación técnica y acompañamiento especializado, para desarrollar soluciones adaptadas a diferentes necesidades energéticas — de vender equipos a resolver necesidades energéticas críticas.',
+    'Inversiones ICR es una empresa especializada en soluciones energéticas, enfocada en la comercialización de componentes electrónicos, sistemas de energía solar y tecnologías relacionadas con eficiencia y respaldo energético. Desarrollamos proyectos B2B para industrias, minería, instituciones públicas, gobiernos y organizaciones con necesidades críticas de continuidad energética, y atendemos el mercado B2C mediante kits solares y soluciones energéticas para hogares y pequeños negocios. Nuestra experiencia combina tecnología, implementación técnica y acompañamiento especializado, para desarrollar soluciones adaptadas a diferentes necesidades energéticas.',
   positioning:
     'Para empresas, instituciones y personas que buscan mejorar su eficiencia energética, Inversiones ICR desarrolla soluciones tecnológicas de energía solar y respaldo energético mediante ingeniería especializada, equipos confiables y soporte permanente.',
 }
 
 export const contact = {
-  phoneDisplay: '+51 999 999 999',
-  phoneWhatsapp: '51999999999', // TODO: reemplazar con el número real de WhatsApp
-  email: 'contacto@inversionesicr.pe', // TODO: confirmar correo real
-  address: 'Arequipa, Perú', // TODO: confirmar dirección exacta
-  facebook: 'https://facebook.com/inversionesicr',
+  phoneDisplay: '+51 945 103 227',
+  phoneWhatsapp: '51945103227', // TODO: reemplazar con el número real de WhatsApp
+  email: 'proyectos@inversionesicr.com', // TODO: confirmar correo real
+  address: 'Calle Pizarro 325-C Cercado de Arequipa', // TODO: confirmar dirección exacta
+  facebook: 'https://www.facebook.com/profile.php?id=61579316365726',
   instagram: 'https://instagram.com/inversionesicr',
 }
 
 export const whatsappLink = (message = 'Hola, quiero más información sobre las soluciones energéticas de Inversiones ICR.') =>
-  `https://wa.me/${contact.phoneWhatsapp}?text=${encodeURIComponent(message)}`
+  `https://wa.me/51945103227`
 
 export const navLinks = [
   { label: 'Nosotros', to: '/nosotros' },

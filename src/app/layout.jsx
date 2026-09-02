@@ -7,7 +7,7 @@ export const metadata = {
   description:
     'Inversiones ICR — Energía confiable, soluciones inteligentes. Soluciones energéticas para minería, industria, agricultura, textil y energía en todo el Perú.',
   icons: {
-    icon: '/favicon.svg',
+    icon: '/favicon.png',
   },
 }
 
