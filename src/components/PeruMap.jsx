@@ -1,3 +1,5 @@
+'use client'
+
 import useAssetExists from '../hooks/useAssetExists'
 
 // Hay un archivo real en public/icons/maps/Perú.svg, pero su encaje

@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 
 // Comprueba si una imagen en /public existe y termina de cargar, para poder

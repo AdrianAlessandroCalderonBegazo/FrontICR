@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import ProjectImage from './ProjectImage'
 import { sectors } from '../data/content'
 
@@ -17,7 +17,7 @@ export default function ProjectCard({ project }) {
         <h3 className="mt-1 font-bold text-lg text-icr-navy">{project.title}</h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-icr-navy/70">{project.summary}</p>
         <Link
-          to={`/experiencia/${project.id}`}
+          href={`/experiencia/${project.id}`}
           className="mt-4 inline-flex items-center gap-1 font-bold text-icr-navy hover:text-icr-cyan"
         >
           Leer más

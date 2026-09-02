@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { brand, contact, featuredProjects } from '../data/content'
 
 function IconWrap({ children }) {
@@ -68,27 +68,27 @@ export default function Footer() {
           <p className="font-bold text-white mb-3">Nosotros</p>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link to="/nosotros" className="hover:text-icr-mint">Historia</Link>
+              <Link href="/nosotros" className="hover:text-icr-mint">Historia</Link>
             </li>
             <li>
-              <Link to="/nosotros#hitos" className="hover:text-icr-mint">Hitos</Link>
+              <Link href="/nosotros#hitos" className="hover:text-icr-mint">Hitos</Link>
             </li>
             <li>
-              <Link to="/nosotros#valores" className="hover:text-icr-mint">Nuestros valores</Link>
+              <Link href="/nosotros#valores" className="hover:text-icr-mint">Nuestros valores</Link>
             </li>
           </ul>
 
           <p className="font-bold text-white mt-6 mb-3">Experiencia</p>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link to="/experiencia" className="hover:text-icr-mint">Cartera de proyectos</Link>
+              <Link href="/experiencia" className="hover:text-icr-mint">Cartera de proyectos</Link>
             </li>
           </ul>
 
           <p className="font-bold text-white mt-6 mb-3">Soluciones</p>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link to="/soluciones" className="hover:text-icr-mint">Ver soluciones</Link>
+              <Link href="/soluciones" className="hover:text-icr-mint">Ver soluciones</Link>
             </li>
           </ul>
         </div>
@@ -98,7 +98,7 @@ export default function Footer() {
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
             {featuredProjects.map((p) => (
               <li key={p.id}>
-                <Link to={`/experiencia/${p.id}`} className="hover:text-icr-mint">
+                <Link href={`/experiencia/${p.id}`} className="hover:text-icr-mint">
                   {p.title}
                 </Link>
               </li>

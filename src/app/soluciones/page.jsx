@@ -1,5 +1,10 @@
-import { Link } from 'react-router-dom'
-import WhatsAppButton from '../components/WhatsAppButton'
+import Link from 'next/link'
+import WhatsAppButton from '../../components/WhatsAppButton'
+
+export const metadata = {
+  title: 'Soluciones | Inversiones ICR',
+  description: 'Soluciones energéticas de Inversiones ICR — contenido en preparación.',
+}
 
 export default function Soluciones() {
   return (
@@ -15,7 +20,7 @@ export default function Soluciones() {
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
-            to="/contacto"
+            href="/contacto"
             className="rounded-full bg-white px-7 py-3 font-bold text-icr-navy transition-transform hover:scale-105"
           >
             Hablar con un especialista

@@ -1,22 +1,36 @@
 # Inversiones ICR — Sitio corporativo
 
-Frontend del sitio corporativo de Inversiones ICR: React + Vite + Tailwind CSS + React Router.
+Frontend del sitio corporativo de Inversiones ICR: Next.js (App Router) + Tailwind CSS.
+
+> Esta es la rama `nextjs-migration`: mismo sitio, mismo diseño, reescrito sobre Next.js
+> para desplegarse con Node + Docker. La versión Vite + React Router original sigue
+> disponible en `claude/corporate-website-frontend-1sozw1`.
 
 ## Desarrollo
 
 ```bash
 npm install
-npm run dev      # servidor de desarrollo
-npm run build    # build de producción (carpeta dist/)
-npm run preview  # previsualizar el build
+npm run dev      # servidor de desarrollo (next dev)
+npm run build    # build de producción (.next/)
+npm run start    # levanta el build de producción (next start)
 ```
+
+## Despliegue con Node + Docker
+
+`next.config.js` tiene `output: 'standalone'`, así que `npm run build` genera además
+`.next/standalone/server.js`, un servidor Node autocontenido con solo las dependencias
+que realmente usa (ideal para una imagen Docker liviana). Ese modo **no** copia solo
+por sí mismo los estáticos — en el Dockerfile hay que copiar también `public/` y
+`.next/static/` dentro de `.next/standalone/` antes de correr `node server.js`
+(es el patrón estándar documentado por Next.js para `output: standalone`). Aún no
+se agregó el Dockerfile en sí — avisar si se quiere que lo arme.
 
 ## Estructura
 
-- `src/pages/` — una página por ruta (`Home`, `Nosotros`, `Sectores`, `Soluciones`, `Experiencia`, `ProyectoDetalle`, `Contacto`).
-- `src/components/` — Navbar, Footer, Layout, Carousel, FAQAccordion, ProjectCard, ProjectImage, HeroBackground, VideoWithFallback, PeruMap, WhatsAppButton, iconos de sector e ilustraciones de respaldo.
+- `src/app/` — rutas del App Router: `page.jsx` (Home), `nosotros/`, `sectores/`, `soluciones/`, `experiencia/` (+ `experiencia/[id]/` para el detalle de proyecto, con `generateStaticParams`), `contacto/`, además de `layout.jsx` (navbar + footer + metadata del sitio) y `globals.css`.
+- `src/components/` — Navbar, Footer, Carousel, FAQAccordion, ProjectCard, ProjectImage, HeroBackground, VideoWithFallback, PeruMap, WhatsAppButton, iconos de sector e ilustraciones de respaldo. Los que usan estado/efectos del navegador llevan `'use client'` arriba; el resto son Server Components.
 - `src/data/content.js` — todo el contenido textual del sitio (propósito, misión/visión, valores, proyectos, FAQ, datos de contacto). Editar aquí primero ante cualquier cambio de copy.
-- `public/fonts/` — tipografías Gotham (Black, Bold, Medium) declaradas vía `@font-face` en `src/index.css`.
+- `public/fonts/` — tipografías Gotham (Black, Bold, Medium, Book) declaradas vía `@font-face` en `src/app/globals.css`.
 
 ## Pendientes de contenido real
 

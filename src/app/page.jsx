@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import Carousel from '../components/Carousel'
 import SectionHeading from '../components/SectionHeading'
 import ProjectImage from '../components/ProjectImage'
@@ -25,7 +25,7 @@ export default function Home() {
           <p className="mt-6 max-w-xl text-base text-white/80 md:text-lg">{brand.promise}</p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
-              to="/soluciones"
+              href="/soluciones"
               className="rounded-full bg-icr-mint px-7 py-3 font-bold text-icr-navy transition-transform hover:scale-105"
             >
               Ver soluciones
@@ -78,7 +78,7 @@ export default function Home() {
                   <h3 className="mt-1 font-bold text-lg text-icr-navy">{project.title}</h3>
                   <p className="mt-2 flex-1 text-sm text-icr-navy/70">{project.summary}</p>
                   <Link
-                    to={`/experiencia/${project.id}`}
+                    href={`/experiencia/${project.id}`}
                     className="mt-4 font-bold text-icr-navy hover:text-icr-cyan"
                   >
                     Ver proyecto →
@@ -105,7 +105,7 @@ export default function Home() {
             {sectors.map((sector) => (
               <Link
                 key={sector.id}
-                to={`/sectores#${sector.id}`}
+                href={`/sectores#${sector.id}`}
                 className="group flex h-full flex-col items-center gap-4 rounded-2xl border border-icr-navy/10 p-6 text-center transition-colors hover:border-icr-cyan hover:bg-icr-navy/[0.03]"
               >
                 <span className="flex h-16 w-16 items-center justify-center rounded-full bg-icr-navy text-white transition-colors group-hover:bg-icr-cyan">
@@ -126,7 +126,7 @@ export default function Home() {
           </h2>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              to="/contacto"
+              href="/contacto"
               className="rounded-full bg-white px-7 py-3 font-bold text-icr-navy transition-transform hover:scale-105"
             >
               Hablar con un especialista

@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 
 const DEFAULT_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp']

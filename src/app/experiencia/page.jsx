@@ -1,7 +1,9 @@
+'use client'
+
 import { useMemo, useState } from 'react'
-import SectionHeading from '../components/SectionHeading'
-import ProjectCard from '../components/ProjectCard'
-import { projects, sectors } from '../data/content'
+import SectionHeading from '../../components/SectionHeading'
+import ProjectCard from '../../components/ProjectCard'
+import { projects, sectors } from '../../data/content'
 
 export default function Experiencia() {
   const [filter, setFilter] = useState('todos')

@@ -1,6 +1,8 @@
+'use client'
+
 import { useState } from 'react'
-import WhatsAppButton from '../components/WhatsAppButton'
-import { contact, whatsappLink } from '../data/content'
+import WhatsAppButton from '../../components/WhatsAppButton'
+import { contact, whatsappLink } from '../../data/content'
 
 const HEARD_OPTIONS = [
   'Redes sociales',

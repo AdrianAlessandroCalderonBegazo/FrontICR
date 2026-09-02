@@ -1,17 +1,31 @@
-import { Link, useParams } from 'react-router-dom'
-import ProjectImage from '../components/ProjectImage'
-import WhatsAppButton from '../components/WhatsAppButton'
-import { projects, sectors } from '../data/content'
+import Link from 'next/link'
+import ProjectImage from '../../../components/ProjectImage'
+import WhatsAppButton from '../../../components/WhatsAppButton'
+import { projects, sectors } from '../../../data/content'
 
-export default function ProyectoDetalle() {
-  const { id } = useParams()
+export function generateStaticParams() {
+  return projects.map((p) => ({ id: p.id }))
+}
+
+export async function generateMetadata({ params }) {
+  const { id } = await params
+  const project = projects.find((p) => p.id === id)
+  if (!project) return { title: 'Proyecto no encontrado | Inversiones ICR' }
+  return {
+    title: `${project.title} | Inversiones ICR`,
+    description: project.summary,
+  }
+}
+
+export default async function ProyectoDetalle({ params }) {
+  const { id } = await params
   const project = projects.find((p) => p.id === id)
 
   if (!project) {
     return (
       <div className="container-icr flex min-h-[50vh] flex-col items-center justify-center gap-4 py-24 text-center">
         <h1 className="font-black text-2xl text-icr-navy">Proyecto no encontrado</h1>
-        <Link to="/experiencia" className="font-bold text-icr-cyan">
+        <Link href="/experiencia" className="font-bold text-icr-cyan">
           Volver a experiencia
         </Link>
       </div>
@@ -27,7 +41,7 @@ export default function ProyectoDetalle() {
         <ProjectImage project={project} className="absolute inset-0 h-full w-full" />
         <div className="absolute inset-0 bg-gradient-to-t from-icr-navy via-icr-navy/70 to-icr-navy/30" />
         <div className="container-icr relative z-10 py-20 md:py-28">
-          <Link to="/experiencia" className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white">
+          <Link href="/experiencia" className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white">
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M15 5l-7 7 7 7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -82,7 +96,7 @@ export default function ProyectoDetalle() {
               {related.map((r) => (
                 <Link
                   key={r.id}
-                  to={`/experiencia/${r.id}`}
+                  href={`/experiencia/${r.id}`}
                   className="group overflow-hidden rounded-2xl border border-icr-navy/10"
                 >
                   <ProjectImage project={r} className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-105" />

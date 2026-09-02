@@ -1,3 +1,5 @@
+'use client'
+
 import SceneIllustration from './illustrations/SceneIllustration'
 import useFirstExistingAsset from '../hooks/useFirstExistingAsset'
 

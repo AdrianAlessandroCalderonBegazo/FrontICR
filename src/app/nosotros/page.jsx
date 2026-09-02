@@ -1,10 +1,15 @@
-import { Link } from 'react-router-dom'
-import Carousel from '../components/Carousel'
-import SectionHeading from '../components/SectionHeading'
-import ProjectImage from '../components/ProjectImage'
-import HeroBackground from '../components/HeroBackground'
-import VideoWithFallback from '../components/VideoWithFallback'
-import { brand, history, values, hitos } from '../data/content'
+import Link from 'next/link'
+import Carousel from '../../components/Carousel'
+import SectionHeading from '../../components/SectionHeading'
+import ProjectImage from '../../components/ProjectImage'
+import HeroBackground from '../../components/HeroBackground'
+import VideoWithFallback from '../../components/VideoWithFallback'
+import { brand, history, values, hitos } from '../../data/content'
+
+export const metadata = {
+  title: 'Nosotros | Inversiones ICR',
+  description: 'Nuestro propósito, valores, hitos e historia en Inversiones ICR.',
+}
 
 export default function Nosotros() {
   return (
@@ -90,7 +95,7 @@ export default function Nosotros() {
                   <h3 className="mt-1 font-bold text-lg text-icr-navy">{project.title}</h3>
                   <p className="mt-2 flex-1 text-sm text-icr-navy/70">{project.summary}</p>
                   <Link
-                    to={`/experiencia/${project.id}`}
+                    href={`/experiencia/${project.id}`}
                     className="mt-4 font-bold text-icr-navy hover:text-icr-cyan"
                   >
                     Ver proyecto →

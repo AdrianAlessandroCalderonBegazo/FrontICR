@@ -1,3 +1,5 @@
+'use client'
+
 // Iconos de sector — ilustraciones propias en estilo lineal, usadas como
 // respaldo mientras no existan los archivos svgrepo reales. En cuanto se
 // copien a public/icons/sectors/ con el nombre indicado en SECTOR_ICON_FILES,

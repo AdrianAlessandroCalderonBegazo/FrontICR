@@ -1,10 +1,13 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { navLinks } from '../data/content'
 
 function Logo() {
   return (
-    <Link to="/" className="flex items-center shrink-0" aria-label="Inversiones ICR — Inicio">
+    <Link href="/" className="flex items-center shrink-0" aria-label="Inversiones ICR — Inicio">
       <img src="/favicon.svg" alt="Inversiones ICR" className="h-12 w-12 md:h-14 md:w-14" />
     </Link>
   )
@@ -14,7 +17,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [sectoresOpen, setSectoresOpen] = useState(false)
-  const location = useLocation()
+  const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -26,7 +29,7 @@ export default function Navbar() {
   useEffect(() => {
     setOpen(false)
     setSectoresOpen(false)
-  }, [location.pathname])
+  }, [pathname])
 
   return (
     <header
@@ -46,25 +49,23 @@ export default function Navbar() {
                 onMouseEnter={() => setSectoresOpen(true)}
                 onMouseLeave={() => setSectoresOpen(false)}
               >
-                <NavLink
-                  to={link.to}
-                  className={({ isActive }) =>
-                    `flex items-center gap-1 py-2 hover:text-icr-cyan transition-colors ${
-                      isActive ? 'text-icr-cyan' : ''
-                    }`
-                  }
+                <Link
+                  href={link.to}
+                  className={`flex items-center gap-1 py-2 hover:text-icr-cyan transition-colors ${
+                    pathname === link.to ? 'text-icr-cyan' : ''
+                  }`}
                 >
                   {link.label}
                   <svg viewBox="0 0 12 8" className="h-2.5 w-2.5 mt-0.5" fill="none">
                     <path d="M1 1l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
-                </NavLink>
+                </Link>
                 {sectoresOpen && (
                   <ul className="absolute left-1/2 top-full w-56 -translate-x-1/2 rounded-xl border border-icr-navy/10 bg-white p-2 shadow-card">
                     {link.children.map((child) => (
                       <li key={child.label}>
                         <Link
-                          to={child.to}
+                          href={child.to}
                           className="block rounded-lg px-3 py-2 text-sm hover:bg-icr-navy/5 hover:text-icr-cyan"
                         >
                           {child.label}
@@ -76,21 +77,21 @@ export default function Navbar() {
               </li>
             ) : (
               <li key={link.label}>
-                <NavLink
-                  to={link.to}
-                  className={({ isActive }) =>
-                    `py-2 hover:text-icr-cyan transition-colors ${isActive ? 'text-icr-cyan' : ''}`
-                  }
+                <Link
+                  href={link.to}
+                  className={`py-2 hover:text-icr-cyan transition-colors ${
+                    pathname === link.to ? 'text-icr-cyan' : ''
+                  }`}
                 >
                   {link.label}
-                </NavLink>
+                </Link>
               </li>
             ),
           )}
         </ul>
 
         <Link
-          to="/contacto"
+          href="/contacto"
           className="hidden lg:inline-flex rounded-full bg-icr-navy px-5 py-2.5 font-bold text-white transition-colors hover:bg-icr-blue"
         >
           Cotiza tu proyecto
@@ -118,14 +119,14 @@ export default function Navbar() {
           <ul className="container-icr flex flex-col py-3 font-medium text-icr-navy">
             {navLinks.map((link) => (
               <li key={link.label} className="border-b border-icr-navy/5 py-1">
-                <Link to={link.to} className="block py-2">
+                <Link href={link.to} className="block py-2">
                   {link.label}
                 </Link>
                 {link.children && (
                   <ul className="pb-2 pl-4">
                     {link.children.map((child) => (
                       <li key={child.label}>
-                        <Link to={child.to} className="block py-1.5 text-sm text-icr-navy/70">
+                        <Link href={child.to} className="block py-1.5 text-sm text-icr-navy/70">
                           {child.label}
                         </Link>
                       </li>
@@ -136,7 +137,7 @@ export default function Navbar() {
             ))}
             <li className="pt-3">
               <Link
-                to="/contacto"
+                href="/contacto"
                 className="block rounded-full bg-icr-navy px-5 py-2.5 text-center font-bold text-white"
               >
                 Cotiza tu proyecto

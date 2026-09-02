@@ -1,23 +1,30 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import Carousel from '../components/Carousel'
-import SectionHeading from '../components/SectionHeading'
-import ProjectImage from '../components/ProjectImage'
-import WhatsAppButton from '../components/WhatsAppButton'
-import FAQAccordion from '../components/FAQAccordion'
-import { SectorIcon } from '../components/icons/SectorIcons'
-import { sectors, projectsBySector, agricultureGeneric, featuredProjects, faqs } from '../data/content'
+import Carousel from '../../components/Carousel'
+import SectionHeading from '../../components/SectionHeading'
+import ProjectImage from '../../components/ProjectImage'
+import WhatsAppButton from '../../components/WhatsAppButton'
+import FAQAccordion from '../../components/FAQAccordion'
+import { SectorIcon } from '../../components/icons/SectorIcons'
+import { sectors, projectsBySector, agricultureGeneric, featuredProjects, faqs } from '../../data/content'
 
 export default function Sectores() {
-  const { hash } = useLocation()
   const [activeSector, setActiveSector] = useState(sectors[0].id)
 
+  // El hash de la URL (#mina, #industria, ...) no llega al servidor en
+  // Next.js, así que se lee del lado del cliente al montar y ante cambios.
   useEffect(() => {
-    const id = hash?.replace('#', '')
-    if (id && sectors.some((s) => s.id === id)) {
-      setActiveSector(id)
+    const applyHash = () => {
+      const id = window.location.hash.replace('#', '')
+      if (id && sectors.some((s) => s.id === id)) {
+        setActiveSector(id)
+      }
     }
-  }, [hash])
+    applyHash()
+    window.addEventListener('hashchange', applyHash)
+    return () => window.removeEventListener('hashchange', applyHash)
+  }, [])
 
   const sector = sectors.find((s) => s.id === activeSector)
   const sectorProjects = projectsBySector(activeSector)
