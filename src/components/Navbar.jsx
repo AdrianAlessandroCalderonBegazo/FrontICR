@@ -5,7 +5,7 @@ import { navLinks } from '../data/content'
 function Logo() {
   return (
     <Link to="/" className="flex items-center shrink-0" aria-label="Inversiones ICR — Inicio">
-      <img src="/favicon.svg" alt="Inversiones ICR" className="h-12 w-12 md:h-14 md:w-14" />
+      <img src="/HorizontalICR.png" alt="Inversiones ICR" className="w-60 h-auto" />         
     </Link>
   )
 }
