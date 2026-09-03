@@ -234,7 +234,7 @@ export const projects = [
     client: 'Centro de Estudios y Promoción del Desarrollo',
     location: 'Puquio, Ayacucho, Perú',
     sector: 'energia',
-    images: ['/images/projects/ong-desco-1.jpg', '/images/projects/ong-desco-2.jpg'],
+    images: ['/images/projects/ong-desco-3.jpg', '/images/projects/ong-desco-2.jpg', '/images/projects/ong-desco-1.jpg'],
     featured: true,
     hito: true,
     summary:
